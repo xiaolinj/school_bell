@@ -1,17 +1,15 @@
 from playsound import playsound
 import time
 
-timetable = {(19,25):1, (19,50):1, (20,00):1, (20,45):1}
-#timetable = {(8,0):1,(8,45):0,(8,50):1,(9,35):0,
-#             (9,50):1,(10,35):0,(10,40):1,(11,25):0,
-#             (11,30):1,(12,15):0,(13,30):1,(14,15):0,
-#             (14,20):1,(15,5):0,(15,20):0,(16,5):0,
-#             (16,10):1,(16,55):0,(18,30):1,(19,15):0,
-#             (19,20):1,(20,5):0,(20,10):1,(20,55):0}
+#timetable = {(19,25):1, (19,50):1, (20,11):1, (20,45):1}
+timetable = {(8,0):1,(8,45):1,(9,0):1,(9,45):1,(10,0):1,(10,45):1,(11,0):1,(11,45):1,
+            (12,0):1,(12,45):1,(13,0):1,(13,45):1,(14,0):1,(14,45):1,(15,0):1,(15,45):1,
+            (16,0):1,(16,45):1,(17,0):1,(17,45):1,(18,0):1,(18,45):1,(19,0):1,(19,45):1,
+            (20,0):1,(20,45):1,(21,0):1,(21,45):1,(22,0):1,(22,45):1}
  
 def ring():
     print("ring",time.localtime().tm_hour, time.localtime().tm_min, time.localtime().tm_sec)
-    playsound('bells.mp3')
+    playsound('school_bell.mp3')
  
 def itemcheck(_time):
     if _time[0] == time.localtime().tm_hour and _time[1] == time.localtime().tm_min:
@@ -23,12 +21,13 @@ def itemcheck(_time):
 #        global breakflag
         print("before ring", gaptime)
         time.sleep(gaptime*60 - time.localtime().tm_sec)
-        ring()
+        if gaptime < 40:
+            ring()
+        else:
+            playsound('start.mp3')
         timetable[_time] = 0
     #after
     elif timetable[_time] :
-        print("pass")
-        #ring()
         timetable[_time] = 0
 
 print("start",time.localtime().tm_hour, time.localtime().tm_min)
