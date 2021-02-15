@@ -10,7 +10,7 @@ def get_timetable():
     return rows
 
 
-def bell_and_toast(list_timetable):
+def bell(list_timetable):
     class_begin = []
     class_end = []
     for line in list_timetable[1:]:
@@ -21,13 +21,14 @@ def bell_and_toast(list_timetable):
     while class_index < length:
         now_localtime = time.strftime('%H:%M:%S', time.localtime())
         if now_localtime in class_begin:
-            class_index = class_begin.index(now_localtime) + 1
             playsound('bells.mp3')
         if now_localtime in class_end:
             playsound('bells.mp3')
+        class_index = class_begin.index(now_localtime) + 1
             
 
 if __name__ == "__main__":
     print('running')
-    bell_and_toast(get_timetable())
+    bell(get_timetable())
+    print('exit')
     sys.exit()
